@@ -1,0 +1,16 @@
+## Chapter 8: Malware Removal Best Practices and Mobile OS Troubleshooting — Flashcards
+
+| # | Front (Question) | Back (Answer) |
+|---|-----------------|---------------|
+| 1 | 7-Step Malware Removal Process — list all steps IN ORDER | 1) Investigate and verify malware symptoms 2) Quarantine infected systems 3) Disable System Restore (Windows) 4) Remediate infected systems (update + scan) 5) Schedule scans and run updates 6) Enable System Restore and create a restore point 7) Educate the end user. Exam tip: order is heavily tested — memorize as 'I Quit Dieting, Remembering Scheduled Restore Education.' |
+| 2 | Why disable System Restore BEFORE remediation? | Prevents the malware from being saved into a restore point and reintroduced later if the system is ever rolled back. Always disable before scanning/cleaning, never after. |
+| 3 | Why re-enable System Restore AFTER remediation, not before? | You want the restore point created in Step 6 to reflect a clean, malware-free system state — enabling it earlier risks capturing infected files. |
+| 4 | Step 2 of malware removal: Quarantine — what exact action? | Physically disconnect network cable or disable Wi-Fi/Bluetooth on the infected machine to stop malware from spreading or communicating with C2 servers, before any cleanup begins. |
+| 5 | Windows command/GUI to disable System Restore | Control Panel > System > System Protection > select drive > Configure > Disable system protection. Exam tip: can also be scripted via PowerShell: Disable-ComputerRestore -Drive 'C:\' |
+| 6 | Windows command/GUI to manually create a restore point | System Protection tab > Create button, or PowerShell: Checkpoint-Computer -Description 'Post-remediation clean state'. Do this only during Step 6, after remediation. |
+| 7 | Step 5 vs Step 6 — which comes first? | Step 5 (schedule scans, run updates) comes BEFORE Step 6 (re-enable System Restore + create restore point). Exam trap: many test-takers swap these two. |
+| 8 | Malware Investigate (Step 1) vs Quarantine (Step 2) — what's the difference? | Step 1 = confirm symptoms are actually malware (rule out hardware/driver issues). Step 2 = isolate the confirmed-infected machine from the network. Investigation always precedes isolation. |
+| 9 | Mobile symptom: unresponsive touchscreen — first troubleshooting steps | 1) Reboot device 2) Remove screen protector/case interference 3) Check for stuck app freezing UI (force close) 4) Check for physical damage/liquid exposure 5) Recalibrate or factory reset if software-related persists. |
+| 10 | Mobile symptom: unauthorized data usage — likely causes | Malicious/adware app running background transmissions, app auto-sync misconfiguration, or compromised account syncing large data. Check Settings > Data Usage per app first. |
+| 11 | Mobile symptom: excessive battery drain — diagnostic order | 1) Check battery usage stats by app 2) Force-close/uninstall high-drain rogue apps 3) Check for OS update pending 4) Test in Safe Mode to rule out third-party app 5) Replace battery only if hardware degradation confirmed. |
+| 12 | App crashes on mobile OS — troubleshooting order | 1) Force-stop and reopen app 2) Clear app cache/data 3) Update the app 4) Update the OS 5) Uninstall/reinstall 6) Factory reset device as last resort. |

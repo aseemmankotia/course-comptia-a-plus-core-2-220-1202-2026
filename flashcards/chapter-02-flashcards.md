@@ -1,0 +1,16 @@
+## Chapter 2: Windows Command-Line Utilities for Diagnostics and Networking — Flashcards
+
+| # | Front (Question) | Back (Answer) |
+|---|-----------------|---------------|
+| 1 | ipconfig /release vs ipconfig /renew — what does each do? | /release drops the current DHCP-assigned IP (adapter shows 0.0.0.0). /renew requests a new lease from DHCP. Exam tip: run /release THEN /renew together to force a fresh IP. |
+| 2 | What does ipconfig /all show that plain ipconfig does not? | MAC address, DHCP server, DNS servers, lease obtained/expires times, and full adapter details. Exam tip: use /all when troubleshooting DNS or DHCP lease problems. |
+| 3 | sfc /scannow vs chkdsk /f /r — when to use which? | sfc /scannow repairs corrupted/missing Windows system files (missing DLLs, app crashes). chkdsk /f /r fixes file system errors (/f) and scans/recovers bad sectors (/r). Exam tip: system file corruption = sfc; disk/sector errors = chkdsk. |
+| 4 | chkdsk /f vs chkdsk /r — what's the difference? | /f fixes logical file system errors only. /r does everything /f does PLUS locates bad sectors and recovers readable data (implies /f). Exam tip: /r takes longer and requires a dismount/reboot on the system drive. |
+| 5 | gpupdate /force vs gpresult /r — purpose of each? | gpupdate /force re-applies ALL Group Policy settings immediately (even unchanged ones). gpresult /r displays a summary of which GPOs are currently applied (RSoP) — it's diagnostic, not corrective. |
+| 6 | Command: map network share \\Server\Share to drive Z: | net use Z: \\Server\Share  \|  To disconnect: net use Z: /delete  \|  Exam tip: add /persistent:yes to reconnect the mapping at every logon. |
+| 7 | robocopy /mir switch — what does it do and what's the risk? | /mir mirrors source to destination, including DELETING files at the destination that no longer exist at the source. Exam tip: dangerous if source/destination are reversed by mistake — can wipe data. |
+| 8 | robocopy /z switch — purpose? | Enables restartable mode: if the copy is interrupted (e.g., network drop), it resumes from where it left off instead of restarting the entire file. Exam tip: use for large files over unreliable links. |
+| 9 | netstat -an — what does the output show? | All active TCP/UDP connections and listening ports (-a) displayed numerically (-n, no name resolution). Exam tip: use -n to speed up output and avoid DNS lookup delays. |
+| 10 | nslookup — what is it used for on the exam? | Queries DNS servers directly to resolve hostnames to IPs (or reverse) and troubleshoot DNS record issues. Exam tip: if ping fails by hostname but works by IP, suspect DNS — use nslookup to confirm. |
+| 11 | Command Prompt vs PowerShell vs Windows Terminal — key distinction | Command Prompt = legacy cmd shell (batch scripting only). PowerShell = cmdlet-based shell with object pipelines, can also run cmd commands. Windows Terminal = a modern HOST APP that can run cmd, PowerShell, and WSL in tabs — it is not a shell itself. |
+| 12 | How do you run a command with elevated (Administrator) privileges? | Right-click Command Prompt/PowerShell → 'Run as administrator', or from Start menu type the app name, press Ctrl+Shift+Enter. Exam tip: commands like sfc /scannow, chkdsk /f (on system drive), and diskpart require elevation or they fail/return access denied. |
